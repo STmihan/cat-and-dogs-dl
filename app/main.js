@@ -1,12 +1,13 @@
-import * as core from '@tensorflow/tfjs-core';
-import * as layers from "@tensorflow/tfjs-layers";
+import * as tfjs from '@tensorflow/tfjs';
 
 const imageContainer = document.getElementById('image_container');
 const uploadForm = document.getElementById('upload_form');
 const processButton = document.getElementById('process_button');
 const resultContainer = document.getElementById('result');
 
-const graphModel = await layers.loadLayersModel("http://localhost:5173/model/model.json");
+const layerPath = import.meta.env.VITE_HOST + import.meta.env.BASE_URL + "model/model.json"
+
+const graphModel = await tfjs.loadLayersModel(layerPath);
 
 let image = null;
 
@@ -36,8 +37,8 @@ processButton.onclick = () => {
 }
 
 async function generateResult() {
-    const pixels = await core.browser.fromPixelsAsync(image, 3)
-    const resized = core.image.resizeBilinear(pixels, [224, 224]);
+    const pixels = await tfjs.browser.fromPixelsAsync(image, 3)
+    const resized = tfjs.image.resizeBilinear(pixels, [224, 224]);
     const batched = resized.expandDims(0);
     const result = await graphModel.predict(batched).data();
     console.log(result);
