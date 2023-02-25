@@ -26,5 +26,6 @@ export default defineConfig({
                 }
             }
         }
-    }
+    },
+    base: '/cat-and-dogs-dl/'
 });
