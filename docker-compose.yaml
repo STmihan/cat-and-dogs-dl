@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  tensorflow-gpu-jupiter:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/tf/notebooks
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
