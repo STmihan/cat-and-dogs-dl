@@ -27,11 +27,6 @@ export default defineComponent({
           text: "Is a cat or a dog?",
           href: "",
           disable: false,
-        },
-        {
-          text: "Find man on photo",
-          href: "",
-          disable: true,
         }
       ],
     };
